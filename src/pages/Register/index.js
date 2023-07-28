@@ -118,9 +118,9 @@ export default function Register({ navigation }) {
         } else {
 
 
-            // setLoading(true);
+            setLoading(true);
 
-            let arr = [];
+            var arr = [];
 
 
             Object.keys(cedera).map((i, index) => {
@@ -128,16 +128,19 @@ export default function Register({ navigation }) {
                 cedera[index].pilih ? arr.push(index) : ''
             });
 
-            setData({
-                ...data,
-                riwayat_cedera: JSON.stringify(arr)
-            })
+
 
             setTimeout(() => {
-                console.log(data);
+
+                const KIRIM = {
+                    ...data,
+                    riwayat_cedera: JSON.stringify(arr)
+                };
+
+
 
                 axios
-                    .post(apiURL + 'register', data)
+                    .post(apiURL + 'register', KIRIM)
                     .then(res => {
                         console.warn(res.data);
                         setLoading(false);
@@ -157,6 +160,9 @@ export default function Register({ navigation }) {
 
 
                     });
+
+
+
             }, 500)
 
         }

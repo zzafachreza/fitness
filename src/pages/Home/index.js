@@ -291,7 +291,7 @@ export default function Home({ navigation, route }) {
       getData('user').then(u => {
         setUser(u);
         KalkulatorBMI(u.tinggi_badan, u.berat_badan)
-        let ARRTMP = JSON.parse(u.riwayat_cedera).replace('[', '').replace(']', '').split(",");
+        let ARRTMP = JSON.parse(u.riwayat_cedera);
 
         console.log(ARRTMP);
         setRiwayat_cedera(ARRTMP);

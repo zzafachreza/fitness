@@ -22,12 +22,14 @@ export default function Tentang({ navigation, route }) {
     const [open, setOpen] = useState(false);
     const [data, setData] = useState([]);
     useEffect(() => {
+
         axios.post(apiURL + 'get_tentang', {
             jenis: route.params.jenis
         }).then(res => {
             console.log(res.data);
             setData(res.data);
             setOpen(true)
+
         })
     }, [])
     return (

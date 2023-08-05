@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react'
 
 import { MyHeader } from '../../components';
 import { colors, fonts, windowHeight } from '../../utils';
+import { getData, storeData } from '../../utils/localStorage';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function MenuMinggu({ navigation, route }) {
 
@@ -42,9 +44,23 @@ export default function MenuMinggu({ navigation, route }) {
         },
     })
 
+    const isFocus = useIsFocused();
     useEffect(() => {
 
-    }, [])
+        if (isFocus) {
+            getData('week').then(w => {
+                console.log(w);
+                if (!w) {
+                    setWeek(week)
+                } else {
+                    setWeek(w);
+                }
+            })
+        }
+
+
+
+    }, [isFocus])
 
     return (
         <SafeAreaView style={{
@@ -59,11 +75,29 @@ export default function MenuMinggu({ navigation, route }) {
 
                 {Object.keys(week).map(i => {
                     return (
-                        <TouchableOpacity onPress={() => navigation.navigate('MenuHari', {
-                            latihan: latihan,
-                            week: week[i].label
-                        })} style={{
-                            backgroundColor: colors.secondary,
+                        <TouchableOpacity onPress={() => {
+                            navigation.navigate('MenuHari', {
+                                latihan: latihan,
+                                week: week[i].label
+                            });
+
+                            setWeek({
+                                ...week,
+                                [i]: {
+                                    label: week[i].label,
+                                    sudah: true
+                                }
+                            });
+
+                            storeData('week', {
+                                ...week,
+                                [i]: {
+                                    label: week[i].label,
+                                    sudah: true
+                                }
+                            })
+                        }} style={{
+                            backgroundColor: week[i].sudah ? colors.border : colors.secondary,
                             height: windowHeight / 12,
                             justifyContent: 'center',
                             alignItems: 'center',

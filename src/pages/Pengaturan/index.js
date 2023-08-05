@@ -85,7 +85,7 @@ export default function Pengaturan({ navigation }) {
                     <Icon type='ionicon' name='chevron-forward' color={colors.black} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Tentang', {
-                    jenis: 'App'
+                    jenis: 'Aplikasi Fitness'
                 })} style={{
                     flexDirection: 'row',
                     padding: 20,
@@ -104,7 +104,7 @@ export default function Pengaturan({ navigation }) {
                     <Icon type='ionicon' name='chevron-forward' color={colors.black} />
                 </TouchableOpacity>
                 <TouchableOpacity onPress={() => navigation.navigate('Tentang', {
-                    jenis: 'Developer'
+                    jenis: 'Pembuat'
                 })} style={{
                     flexDirection: 'row',
                     padding: 20,

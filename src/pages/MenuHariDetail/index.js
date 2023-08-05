@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 
 import { MyHeader } from '../../components';
 import { colors, fonts, windowHeight } from '../../utils';
-import { MYAPP } from '../../utils/localStorage';
+import { MYAPP, getData, storeData } from '../../utils/localStorage';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function MenuHariDetail({ navigation, route }) {
 
@@ -11,10 +12,32 @@ export default function MenuHariDetail({ navigation, route }) {
     const week = route.params.week;
     const day = route.params.day;
 
+    const [LTN, setLTN] = useState({});
+
+
+    const isFocus = useIsFocused();
+
 
     useEffect(() => {
+        let tmp = [];
+        route.params.latihan.map(i => {
+            tmp.push(false)
+        });
 
-    }, [])
+
+        if (isFocus) {
+            getData(week + day + 'latihan').then(l => {
+                console.log(l)
+                if (!l) {
+                    setLTN(Object.assign({}, tmp));
+                } else {
+                    setLTN(l)
+                }
+            })
+
+        }
+
+    }, [isFocus])
 
     return (
         <SafeAreaView style={{
@@ -59,8 +82,19 @@ export default function MenuHariDetail({ navigation, route }) {
                                     })
 
 
+                                    setLTN({
+                                        ...LTN,
+                                        [index]: true
+                                    })
+
+                                    storeData(week + day + 'latihan', {
+                                        ...LTN,
+                                        [index]: true
+                                    })
+
+
                                 }} style={{
-                                    backgroundColor: colors.primary,
+                                    backgroundColor: LTN[index] ? colors.border : colors.primary,
                                     height: windowHeight / 12,
                                     justifyContent: 'center',
                                     alignItems: 'center',

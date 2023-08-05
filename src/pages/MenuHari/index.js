@@ -3,7 +3,8 @@ import React, { useEffect, useState } from 'react'
 
 import { MyHeader } from '../../components';
 import { colors, fonts, windowHeight } from '../../utils';
-import { MYAPP } from '../../utils/localStorage';
+import { MYAPP, getData, storeData } from '../../utils/localStorage';
+import { useIsFocused } from '@react-navigation/native';
 
 export default function MenuHari({ navigation, route }) {
 
@@ -40,10 +41,23 @@ export default function MenuHari({ navigation, route }) {
         },
     })
 
+    const isFocus = useIsFocused();
     useEffect(() => {
 
-    }, [])
+        if (isFocus) {
+            getData('day' + week).then(d => {
+                console.log(d);
+                if (!d) {
+                    setDay(day)
+                } else {
+                    setDay(d);
+                }
+            })
+        }
 
+
+
+    }, [isFocus])
     return (
         <SafeAreaView style={{
             flex: 1,
@@ -59,7 +73,7 @@ export default function MenuHari({ navigation, route }) {
                     fontSize: 22,
                     textAlign: 'center',
                     color: colors.primary
-                }}>Jadwal Latiha kamu</Text>
+                }}>Jadwal Latihan kamu</Text>
                 <Text style={{
                     fontFamily: fonts.secondary[800],
                     fontSize: 22,
@@ -84,8 +98,25 @@ export default function MenuHari({ navigation, route }) {
                             })
 
 
+                            setDay({
+                                ...day,
+                                [i]: {
+                                    label: day[i].label,
+                                    sudah: true
+                                }
+                            });
+
+                            storeData('day' + week, {
+                                ...day,
+                                [i]: {
+                                    label: day[i].label,
+                                    sudah: true
+                                }
+                            })
+
+
                         }} style={{
-                            backgroundColor: index % 2 == 1 ? colors.danger : colors.primary,
+                            backgroundColor: index % 2 == 1 ? colors.danger : day[i].sudah ? colors.border : colors.primary,
                             height: windowHeight / 12,
                             justifyContent: 'center',
                             alignItems: 'center',

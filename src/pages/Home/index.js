@@ -370,21 +370,21 @@ export default function Home({ navigation, route }) {
         padding: 5,
       }}>
         <Text style={{
-          flex: 0.3,
+          flex: 0.5,
           fontFamily: fonts.secondary[600],
-          fontSize: 14,
+          fontSize: 12,
           color: colors.white
         }}>{label}</Text>
         <Text style={{
           flex: 0.05,
           fontFamily: fonts.secondary[600],
-          fontSize: 14,
+          fontSize: 12,
           color: colors.white
         }}>:</Text>
         <Text style={{
           flex: 1,
           fontFamily: fonts.secondary[600],
-          fontSize: 14,
+          fontSize: 12,
           color: colors.white
         }}>{value}</Text>
       </View>
@@ -463,7 +463,7 @@ export default function Home({ navigation, route }) {
 
       <ScrollView>
         <View style={{
-          marginHorizontal: 20,
+          marginHorizontal: 5,
           borderRadius: 10,
           padding: 10,
           marginTop: 10,
@@ -480,7 +480,7 @@ export default function Home({ navigation, route }) {
 
             <Text style={{
               fontFamily: fonts.secondary[800],
-              fontSize: 14,
+              fontSize: 13,
               color: colors.white
             }}>Riwayat Cedera</Text>
 
@@ -492,7 +492,7 @@ export default function Home({ navigation, route }) {
                 return (
                   <Text style={{
                     fontFamily: fonts.secondary[400],
-                    fontSize: 14,
+                    fontSize: 12,
                     color: colors.white
                   }}>{cedera[i].label} {index < (riwayat_cedera.length - 1) ? ', ' : ''}</Text>
                 )
@@ -507,7 +507,7 @@ export default function Home({ navigation, route }) {
         <View style={{
           opacity: 0.9,
           marginTop: 10,
-          marginHorizontal: 20,
+          marginHorizontal: 5,
           borderRadius: 10,
 
           marginTop: 5,

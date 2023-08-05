@@ -9,7 +9,7 @@ export const colors = {
   danger: '#FF0000',
   black: 'black',
   white: 'white',
-  border: '#E5E5E5',
+  border: '#CDCDCD',
   placeholder: '#8D8D8D',
   zavalabs: '#E7EBF2',
   myicon: '#4090C9',

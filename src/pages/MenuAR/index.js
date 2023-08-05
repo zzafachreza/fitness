@@ -44,10 +44,17 @@ export default function MenuAR({ navigation, route }) {
             nama: route.params.latihan
         }).then(res => {
             console.log(res.data);
-            setData(res.data);
-            setTimeout(() => {
-                setOpen(true);
-            }, 1000)
+
+            if (res.data.length > 0) {
+                setData(res.data);
+                setTimeout(() => {
+                    setOpen(true);
+                }, 1000)
+            } else {
+                Alert.alert(MYAPP, 'Data AR latihan tidak ditemukan !');
+                navigation.goBack()
+            }
+
         })
     }, []);
 

@@ -287,6 +287,10 @@ export default function Home({ navigation, route }) {
 
 
   useEffect(() => {
+
+
+
+
     if (isFocus) {
       getData('user').then(u => {
         setUser(u);
